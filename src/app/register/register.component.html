@@ -1,0 +1,44 @@
+<div class="containerz">
+    <div class="header">
+        <app-nav name="Register"></app-nav>
+    </div>
+    <div class="left">
+        <div class="left-wrapper">
+            <div class="two-by-grid">
+                <button (click)="clickSpecial(special)"  [ngClass]="{ 'menu-selected' : special.IsSelected }" class="btn btn-primary button-special" *ngFor="let special of register.Specials">
+                    <!-- {{category | json}} -->
+                    {{special.Name}}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="center">
+        <div class="center-wrapper">
+            <h1>{{special?.Description}}</h1>
+            <div class="category" *ngFor="let c of special?.Categories">
+                <h3>{{c.Name}}</h3>
+                <div class="category-wrapper">
+                    <button (click)="clickMenuItem(mi)" class="btn btn-success button-category" type="button" *ngFor="let mi of c.MenuItems">{{mi.Label}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="right">
+        <div class="right-wrapper">
+            <div class="receipt-item" *ngFor="let r of register.Receipt.ReceiptItems; let i = index">
+                <div class="item1">{{ i + 1 }}</div>
+                <div class="item1">{{ r.MenuItem.ReceiptLabel }}</div>
+                <div class="item1">{{ r.MenuItem.Price }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="input-group">
+            <input id="SendText" type="text" class="form-control" placeholder="Send a message" aria-label="Type in message here" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="Send">Send</button>
+            </div>
+        </div>
+    </div>
+</div>
