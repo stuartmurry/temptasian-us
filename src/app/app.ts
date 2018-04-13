@@ -13,12 +13,12 @@ export class Register {
 // }
 
 export interface Special {
-    SpecialID : number;
+    // SpecialID : number;
     Name :string;
-    Label : string;
-    Categories : Category[];
+    // Label : string;
+    Categories? : Category[];
     IsSelected? : boolean;
-    Description : string;
+    Description? : string;
 }
 
 export interface Category {

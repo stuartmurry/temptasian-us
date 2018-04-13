@@ -26,7 +26,7 @@ describe('RegisterComponent', () => {
 
   it('should add to register class', () => {
     let register = new Register();
-    register.AddMenuItem({ Name : 'Sweet and Sour Pork', Label: 'Sweet and Sour Pork'});
+    // register.AddMenuItem({ Name : 'Sweet and Sour Pork', Label: 'Sweet and Sour Pork'});
     expect(register.Receipt.ReceiptItems.length > 0).toBeTruthy();
   });
 });

@@ -4,6 +4,7 @@ import {
   AngularFirestoreCollection
 } from "angularfire2/firestore";
 import { Observable } from "rxjs/Observable";
+import { MenuService } from "../service/menu.service";
 
 @Component({
   selector: "app-menu-items",
@@ -11,13 +12,76 @@ import { Observable } from "rxjs/Observable";
   styleUrls: ["./menu-items.component.css"]
 })
 export class MenuItemsComponent implements OnInit {
-  constructor(private afs: AngularFirestore) {}
+  constructor(private afs: AngularFirestore, private ms : MenuService) {}
 
   data: any;
   menuitems = [];
 
   clickImportData() {
-    console.log(this.data)
+    var md  = this.ms.getMenuData().Categories;
+
+    this.afs.collection('menu-items').snapshotChanges().subscribe(mi => {
+      // var bbqChickenSpecial = mi.map(mii => mii.payload.doc.data()).filter(m => m.MenuItemName == 'BBQ CHICKEN')[0];
+      // console.log('bbqChickenSpecial');
+      // console.log(bbqChickenSpecial['Specials']);
+      
+      console.log(md);
+
+      console.log('MenuItems Import');
+      // console.log(mi);
+       mi.forEach(m => {
+
+        var mm = m.payload.doc.data();
+
+        // console.log(Object.keys(md).map(key => md[key]));
+
+        // mm.Categories = {};
+
+        // Object.keys(md).map(key => md[key])
+        // .filter(i => mm.CategoryID == i.CategoryID)
+        // .forEach(i => mm.Categories[i.CategoryName.toUpperCase()] = true);
+
+        // console.log(mm);
+
+
+
+
+        // var theNewSpecial = {};
+        // Object.keys(mm.Specials).forEach(key => {
+        //   theNewSpecial[key.toUpperCase()] = true;
+        // });
+
+        // mm.Specials = theNewSpecial;
+
+        // console.log(mm);
+        // this.afs.doc('menu-items/' + mm['MenuItemName']).update(mm);
+
+        // console.log(.map(t => t.toUpperCase()))
+
+        // if (mm.CategoryID == 7) {
+        //   mm.Specials = bbqChickenSpecial['Specials'];
+          
+
+        //   console.log(mm);
+        //   this.afs.doc('menu-items/' + mm['MenuItemName']).update(mm);
+
+        // }
+        
+
+        // this.afs.doc('menu-items/' + m['MenuItemName']).update(m);
+
+       });
+
+       
+    });
+
+    // Object.keys(md).forEach(i =>  this.afs.doc('menu-items/' + md[i].MenuItemName).set(md[i]));
+
+     
+
+    // this.afs.collection()
+
+
 
 
 
@@ -140,8 +204,9 @@ export class MenuItemsComponent implements OnInit {
   }
 
   ngOnInit() {
-    var o = this.afs.collection("menuitems").valueChanges();
-    o.subscribe(oo => (this.menuitems = oo));
+    
+    // var o = this.afs.collection("menuitems").valueChanges();
+    // o.subscribe(oo => (this.menuitems = oo));
 
     
   }
